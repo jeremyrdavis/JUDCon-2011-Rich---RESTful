@@ -1,0 +1,21 @@
+apply plugin: 'war'
+
+version = '1.0-SNAPSHOT'
+
+jboss_home = '/working/applications/jboss_platforms/jboss-eap-5.1/jboss-as'
+jboss_server = 'default'		
+
+repositories {
+	mavenCentral()
+	mavenRepo urls: "http://repository.jboss.com/maven2"
+}
+
+dependencies {
+    compile fileTree(dir: 'src/main/webapp/WEB-INF/lib', include: '*.jar')
+	runtime fileTree(dir: 'src/main/webapp/WEB-INF/lib', include: '*.jar')
+}
+
+task deploy(type: Copy, dependsOn: assemble) {
+    from 'build/libs/customer.war'
+    into "${jboss_home}/server/${jboss_server}/deploy"
+}
