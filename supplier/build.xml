@@ -345,6 +345,7 @@
 
     <target name="deploy" depends="archive,datasource" description="Deploy the packaged archive">
         <fail unless="jboss.home">jboss.home not set</fail>
+    	<echo message="${deploy.dir}" />
         <copy todir="${deploy.dir}" file="${dist.dir}/${project.name}.ear"/>
     </target>
 

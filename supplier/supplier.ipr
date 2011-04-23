@@ -33,7 +33,7 @@
   <component name="DataSourceManagerImpl">
     <DataSource DataSourceSourceName="LOCAL">
       <option name="DRIVER_CLASS" value="org.h2.Driver" />
-      <option name="DATABASE_URL" value="jdbc:h2:/home/jeremy/Documents/JUDCon/jbds_workspace/data" />
+      <option name="DATABASE_URL" value="jdbc:h2:~/JUDCon2011/data/judcondb" />
       <option name="DRIVER_PATH" />
       <option name="DATBASE_USERNAME" value="sa" />
       <option name="ENCODED_DATABASE_PASSWORD" value="" />
