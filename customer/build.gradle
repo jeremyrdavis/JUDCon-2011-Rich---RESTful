@@ -2,7 +2,7 @@ apply plugin: 'war'
 
 version = '1.0-SNAPSHOT'
 
-jboss_home = '/working/applications/jboss_platforms/jboss-eap-5.1/jboss-as'
+jboss_home = '/home/jeremy/Documents/JUDCon/jboss-eap-5.1/jboss-as'
 jboss_server = 'default'		
 
 repositories {
@@ -16,6 +16,6 @@ dependencies {
 }
 
 task deploy(type: Copy, dependsOn: assemble) {
-    from 'build/libs/customer.war'
+    from 'build/libs/customer-1.0-SNAPSHOT.war'
     into "${jboss_home}/server/${jboss_server}/deploy"
 }

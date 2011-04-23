@@ -1,0 +1,3 @@
+<jboss-web>
+    <context-root>CustomerApp</context-root>
+</jboss-web>
