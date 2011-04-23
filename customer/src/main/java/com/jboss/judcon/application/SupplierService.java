@@ -21,15 +21,15 @@ import com.jboss.judcon.utilities.DAOMock;
 public class SupplierService {
 
 	Logger log = LoggerFactory.getLogger(SupplierService.class);
-	
+
 	public SupplierService() {
 	}
-	
+
 	@GET
 	@Produces("application/json")
-	public StreamingOutput getCustomer() {
+	public StreamingOutput getSupplierJson() {
 		final Supplier supplier = DAOMock.getSupplier();
-		
+
 		if (supplier == null) {
 			throw new WebApplicationException(Response.Status.NOT_FOUND);
 		}
@@ -44,4 +44,15 @@ public class SupplierService {
 		};
 	}
 
+	@GET
+	@Produces("application/xml")
+	public Supplier getSupplierXml() {
+		final Supplier supplier = DAOMock.getSupplier();
+
+		if (supplier == null) {
+			throw new WebApplicationException(Response.Status.NOT_FOUND);
+		}
+		return supplier;
+
+	};
 }
