@@ -15,3 +15,5 @@ darkX.jar
 glassX.jar
 laguana.jar
 #sjsxp.jar
+jackson*.jar
+resteasy*.jar
