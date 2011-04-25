@@ -4,6 +4,7 @@ jboss-seam-excel.jar
 jboss-seam-ioc.jar
 jboss-seam-mail.jar
 jboss-seam-pdf.jar
+jboss-seam-resteasy.jar
 jboss-seam-ui.jar
 jsf-facelets.jar
 jxl.jar
@@ -13,3 +14,6 @@ richfaces-ui.jar
 darkX.jar
 glassX.jar
 laguana.jar
+#sjsxp.jar
+jackson*.jar
+resteasy*.jar
