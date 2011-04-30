@@ -3,7 +3,6 @@
 	<classpathentry kind="src" output="classes/main" path="src/main"/>
 	<classpathentry kind="src" output="classes/hot" path="src/hot"/>
 	<classpathentry kind="src" output="classes/test" path="src/test"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="bootstrap"/>
 	<classpathentry kind="lib" path="lib/hibernate-validator.jar"/>
 	<classpathentry kind="lib" path="lib/hibernate-core.jar"/>
@@ -39,5 +38,17 @@
 	<classpathentry kind="lib" path="lib/richfaces-api.jar"/>
 	<classpathentry kind="lib" path="lib/h2-1.2.142.jar"/>
 	<classpathentry kind="lib" path="lib/lucene-core.jar"/>
-	<classpathentry kind="output" path="test-build"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.jboss.ide.eclipse.as.core.server.runtime.runtimeTarget/jboss-as Runtime">
+		<attributes>
+			<attribute name="owner.project.facets" value="jst.web"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/java-1.6.0-sun-1.6.0.24.x86_64">
+		<attributes>
+			<attribute name="owner.project.facets" value="java"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="output" path="resources/WEB-INF/classes"/>
 </classpath>

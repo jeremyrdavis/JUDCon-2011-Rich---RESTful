@@ -2,7 +2,7 @@ apply plugin: 'war'
 
 version = '1.0-SNAPSHOT'
 
-jboss_home = '/home/jeremy/Documents/JUDCon/jboss-eap-5.1/jboss-as'
+jboss_home = '/home/dkittler/servers/eap_51/jboss-eap-5.1/jboss-as'
 jboss_server = 'default'		
 
 repositories {

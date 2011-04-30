@@ -46,5 +46,7 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/sjsxp.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/slf4j-api.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/slf4j-simple.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/commons-beanutils-1.8.0.jar"/>
+	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/json_simple-1.1.jar"/>
 	<classpathentry kind="output" path="src/main/webapp/WEB-INF/classes"/>
 </classpath>

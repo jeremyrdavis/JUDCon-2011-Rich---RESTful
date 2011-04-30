@@ -18,7 +18,7 @@ import com.jboss.judcon.entities.Produce;
 import com.jboss.judcon.utilities.DAOMock;
 
 
-@Path("/produce")
+@Path("/rest/produce")
 public class ProduceService
 {
 	private Logger log = LoggerFactory.getLogger(ProduceService.class);

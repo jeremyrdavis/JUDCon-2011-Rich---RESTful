@@ -5,6 +5,9 @@ import java.util.Set;
 
 import javax.ws.rs.core.Application;
 
+import com.jboss.judcon.application.service.CustomerService;
+import com.jboss.judcon.application.service.OrderService;
+import com.jboss.judcon.application.service.ProduceService;
 import com.jboss.judcon.application.service.SupplierService;
 
 
@@ -16,7 +19,10 @@ public class CustomerApplication extends Application
 
 	public CustomerApplication()
 	{
-		singletons.add(new SupplierService());
+		singletons.add( new SupplierService() );
+		singletons.add( new OrderService()    );
+		singletons.add( new CustomerService() );
+		singletons.add( new ProduceService()  );	
 	}
 
 	@Override

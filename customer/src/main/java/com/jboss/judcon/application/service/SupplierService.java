@@ -17,7 +17,7 @@ import org.slf4j.LoggerFactory;
 import com.jboss.judcon.entities.Supplier;
 import com.jboss.judcon.utilities.DAOMock;
 
-@Path("/suppliers")
+@Path("/rest/suppliers")
 public class SupplierService {
 
 	Logger log = LoggerFactory.getLogger(SupplierService.class);

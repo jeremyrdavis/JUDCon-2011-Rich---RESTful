@@ -1,23 +1,41 @@
 package com.jboss.judcon.application.service;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Reader;
+import java.io.StringWriter;
+import java.io.Writer;
+import java.net.URI;
+import java.util.Map;
 
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.StreamingOutput;
 
 import org.codehaus.jackson.map.ObjectMapper;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.jboss.judcon.entities.Order;
+import com.jboss.judcon.entities.impl.OrderImpl;
 import com.jboss.judcon.utilities.DAOMock;
 
-@Path("order")
+
+
+@Path("/rest/order")
 public class OrderService
 {
 	private Logger log = LoggerFactory.getLogger(ProduceService.class);
@@ -62,5 +80,154 @@ public class OrderService
 		return o;
 
 	};
+	
+	@GET
+	@Path("{id}")
+	@Produces("application/json")
+	/**
+	 * Return an order given a order id
+	 */
+	public StreamingOutput getOrderJson( @PathParam("id") int id )
+	{
+		//TODO this needs to query the data layer to get the order with the provided id
+		final Order o = DAOMock.getOrder();
+
+		if( o == null ) 
+		{
+			throw new WebApplicationException( Response.Status.NOT_FOUND );
+		}
+		// return the customer json object
+		return new StreamingOutput() 
+		{
+			public void write( OutputStream outputStream ) throws IOException, WebApplicationException 
+			{
+				ObjectMapper mapper = new ObjectMapper();
+				mapper.writeValue(outputStream, o);
+			}
+		};		
+	}
+	
+	@POST
+	@Consumes("application/json")
+	/**
+	 * Create a new Order
+	 */
+	public Response createOrder(InputStream _is)
+	{
+		JSONParser parser = new JSONParser();
+	
+		try
+		{
+			@SuppressWarnings("unchecked")
+			Map<String,String> oMap= (Map<String,String>)parser.parse( convertStreamToString( _is ) );
+			System.out.println("======the 1st element of array======");
+			System.out.println( "This is the id: " + oMap.get("id").toString() );
+			System.out.println( "This is the name: " + oMap.get("name").toString() );
+		}
+		catch (ParseException e)
+		{
+			// TODO Auto-generated catch block
+			System.out.println( e.toString() );
+		}
+		catch( IOException ioe )
+		{
+			// TODO Auto-generated catch block
+			System.out.println( ioe.toString() );
+		}		
+
+		//TODO, create the order ...
+		Order thisOrder = new OrderImpl(100, "test");
+		
+		/* hackoramma
+		try
+		{
+			BeanUtils.copyProperties(thisOrder, _order);
+		}
+		catch (IllegalAccessException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		catch (InvocationTargetException e)
+		{
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		
+		System.out.println("Created order " + thisOrder.getId());
+		return Response.created( URI.create("/order/" + thisOrder.getId())).build();
+	}
+	
+	private String convertStreamToString(InputStream is) throws IOException
+	{
+		/*
+		 * To convert the InputStream to String we use the Reader.read(char[]
+		 * buffer) method. We iterate until the Reader return -1 which means
+		 * there's no more data to read. We use the StringWriter class to
+		 * produce the string.
+		 */
+		if (is != null)
+		{
+			Writer writer = new StringWriter();
+
+			char[] buffer = new char[1024];
+			try
+			{
+				Reader reader = new BufferedReader(new InputStreamReader(is,
+						"UTF-8"));
+				int n;
+				while ((n = reader.read(buffer)) != -1)
+				{
+					writer.write(buffer, 0, n);
+				}
+			}
+			finally
+			{
+				is.close();
+			}
+			System.out.println("this is the string => " + writer.toString() );
+			return writer.toString();
+		}
+		else
+		{
+			return "";
+		}
+	}	
+	
+	
+	@Path("{id}")
+	@DELETE
+	public void delete( @PathParam("id") int id ) 
+	{
+		//TODO 
+		// delete the order from the database for the given order id
+	}
+
+	@PUT
+	@Path("{id}")
+	@Consumes("application/json")
+	public void updateOrder( @PathParam("id") int id, InputStream is )
+	{
+		// TODO 
+		// convert the stream into an object
+		// get the current order from the DB based on the id param
+		// update the current order with the new order data
+		// persist the change.
+		
+//		Customer update = readCustomer(is);
+//		Customer current = customerDB.get(id);
+//		if (current == null)
+//			throw new WebApplicationException(Response.Status.NOT_FOUND);
+//		}
+//		current.setFirstName(update.getFirstName());
+//		current.setLastName(update.getLastName());
+//		current.setStreet(update.getStreet());
+//		current.setState(update.getState());
+//		current.setZip(update.getZip());
+//		current.setCountry(update.getCountry());
+
+	}
+
 	
 }
