@@ -36,7 +36,7 @@ import com.jboss.judcon.utilities.DAOMock;
 /**
  * REST Order Service, this class does the CRUD operations on an order.
  * 
- * @author dkittler
+ * @author Derrick Kittler
  */
 
 @Path("/rest/order")
@@ -139,25 +139,24 @@ public class OrderService
 			Map<String,String> oMap= (Map<String,String>)parser.parse( convertStreamToString( _is ) );
 			orderId = oMap.get("id").toString();
 			orderName = oMap.get("name").toString();
-			System.out.println("======the 1st element of array======");
-			System.out.println( "This is the id: " + orderId );
-			System.out.println( "This is the name: " + orderName );
+			log.debug("====== Create Order Detail ======");
+			log.debug( "This is the id: " + orderId );
+			log.debug( "This is the name: " + orderName );
 		}
 		catch (ParseException e)
 		{
 			// TODO Auto-generated catch block
-			System.out.println( e.toString() );
+			log.error( e.toString() );
 		}
 		catch( IOException ioe )
 		{
-			// TODO Auto-generated catch block
-			System.out.println( ioe.toString() );
+			log.error( ioe.toString() );
 		}		
 
 		Order thisOrder = new OrderImpl( Integer.parseInt( orderId ), orderName ); 
 
 		
-		System.out.println("Created order " + thisOrder.getId());
+		log.debug( "Created order with ID: " + thisOrder.getId() );
 		return Response.created( URI.create("/order/" + thisOrder.getId())).build();
 	}
 	
@@ -178,23 +177,6 @@ public class OrderService
 	public void updateOrder( @PathParam("id") int id, InputStream is )
 	{
 		// TODO 
-		// convert the stream into an object
-		// get the current order from the DB based on the id param
-		// update the current order with the new order data
-		// persist the change.
-		
-//		Customer update = readCustomer(is);
-//		Customer current = customerDB.get(id);
-//		if (current == null)
-//			throw new WebApplicationException(Response.Status.NOT_FOUND);
-//		}
-//		current.setFirstName(update.getFirstName());
-//		current.setLastName(update.getLastName());
-//		current.setStreet(update.getStreet());
-//		current.setState(update.getState());
-//		current.setZip(update.getZip());
-//		current.setCountry(update.getCountry());
-
 	}
 	
 	/**
@@ -218,8 +200,7 @@ public class OrderService
 			char[] buffer = new char[1024];
 			try
 			{
-				Reader reader = new BufferedReader(new InputStreamReader(is,
-						"UTF-8"));
+				Reader reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
 				int n;
 				while ((n = reader.read(buffer)) != -1)
 				{
@@ -230,7 +211,7 @@ public class OrderService
 			{
 				is.close();
 			}
-			System.out.println("this is the string => " + writer.toString() );
+			log.error("Returning the converted string => " + writer.toString() );
 			return writer.toString();
 		}
 		else
